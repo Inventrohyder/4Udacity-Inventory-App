@@ -40,11 +40,13 @@ public class InventoryDbHelperTest {
         assertEquals(InventoryDbHelper.DATABASE_NAME, databaseName);
 
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
-        assertTrue(database.isOpen());
+        assertTrue("Getting a writable database should ensure an open connection to the db",
+                database.isOpen());
         database.close();
 
         database = mDbHelper.getReadableDatabase();
-        assertTrue(database.isOpen());
+        assertTrue("Getting a readable database should ensure an open connection to the db",
+                database.isOpen());
         database.close();
     }
 
@@ -61,7 +63,8 @@ public class InventoryDbHelperTest {
 
         long supplierId = mDbHelper.getWritableDatabase()
                 .insert(SupplierEntry.TABLE_NAME, null, values);
-        assertTrue(supplierId != -1);
+        assertTrue("A successful inserts yields an id value greater than 0",
+                supplierId != -1);
 
 
         Cursor cursor = mDbHelper.getReadableDatabase().query(
@@ -72,14 +75,18 @@ public class InventoryDbHelperTest {
                 null,
                 null,
                 null);
-        assertTrue(cursor.moveToFirst());
+        assertTrue("The cursor should contain at least one row",
+                cursor.moveToFirst());
 
         int nameColIndex = cursor.getColumnIndex(SupplierEntry.COLUMN_NAME);
         int emailColIndex = cursor.getColumnIndex(SupplierEntry.COLUMN_EMAIL);
         int telColIndex = cursor.getColumnIndex(SupplierEntry.COLUMN_TEL_NUMBER);
 
-        assertEquals(name, cursor.getString(nameColIndex));
-        assertEquals(email, cursor.getString(emailColIndex));
-        assertEquals(telNumber, cursor.getString(telColIndex));
+        assertEquals("The queried name must match the inserted name",
+                name, cursor.getString(nameColIndex));
+        assertEquals("The queried email must match the inserted email",
+                email, cursor.getString(emailColIndex));
+        assertEquals("The queried phone number must match the inserted phone number",
+                telNumber, cursor.getString(telColIndex));
     }
 }
