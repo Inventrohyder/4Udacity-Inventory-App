@@ -1,4 +1,4 @@
-package com.inventrohyder.inventoryapp.data;
+package com.inventrohyder.inventory_app.data;
 
 import android.provider.BaseColumns;
 

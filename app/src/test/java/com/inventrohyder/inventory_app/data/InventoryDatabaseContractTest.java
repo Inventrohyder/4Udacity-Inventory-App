@@ -1,7 +1,7 @@
-package com.inventrohyder.inventoryapp.data;
+package com.inventrohyder.inventory_app.data;
 
-import com.inventrohyder.inventoryapp.data.InventoryDatabaseContract.ProductEntry;
-import com.inventrohyder.inventoryapp.data.InventoryDatabaseContract.SupplierEntry;
+import com.inventrohyder.inventory_app.data.InventoryDatabaseContract.ProductEntry;
+import com.inventrohyder.inventory_app.data.InventoryDatabaseContract.SupplierEntry;
 
 import org.junit.Test;
 

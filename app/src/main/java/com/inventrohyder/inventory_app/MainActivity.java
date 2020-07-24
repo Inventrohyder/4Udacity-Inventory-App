@@ -1,8 +1,8 @@
-package com.inventrohyder.inventoryapp;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.inventrohyder.inventory_app;
 
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
