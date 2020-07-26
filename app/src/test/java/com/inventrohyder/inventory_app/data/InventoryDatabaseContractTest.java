@@ -32,7 +32,7 @@ public class InventoryDatabaseContractTest {
                 + "quantity INTEGER  NOT NULL  DEFAULT 0,"
                 + "price NUMERIC  NOT NULL  DEFAULT 0,"
                 + "picture BLOB ,"
-                + "is_available INTEGER ,"
+                + "is_available INTEGER  DEFAULT 0,"
                 + "FOREIGN KEY (supplier_id) REFERENCES tb_suppliers(_id)"
                 + ")";
         assertEquals("Ensure the SQL create statement is correct",
