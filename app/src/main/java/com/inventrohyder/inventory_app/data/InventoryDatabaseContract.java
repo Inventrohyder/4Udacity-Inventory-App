@@ -25,10 +25,6 @@ class InventoryDatabaseContract {
     public static final String INTEGER_TYPE = " INTEGER ";
     public static final String BLOB_TYPE = " BLOB ";
 
-    // Prevent accidental instantiation of the contract class
-    public InventoryDatabaseContract() {
-    }
-
 
     /**
      * Inner class that defines the constant values for the suppliers database table.
@@ -180,7 +176,7 @@ class InventoryDatabaseContract {
                 + COLUMN_QUANTITY + INTEGER_TYPE + NOT_NULL + DEFAULT + "0" + ","
                 + COLUMN_PRICE + NUMERIC_TYPE + NOT_NULL + DEFAULT + "0" + ","
                 + COLUMN_PICTURE + BLOB_TYPE + ","
-                + COLUMN_IS_AVAILABLE + INTEGER_TYPE + ","
+                + COLUMN_IS_AVAILABLE + INTEGER_TYPE + DEFAULT + NOT_AVAILABLE + ","
                 + FOREIGN_KEY + "(" + COLUMN_SUPPLIER_ID + ")"
                 + REFERENCES + SupplierEntry.TABLE_NAME + "(" + SupplierEntry._ID + ")"
                 + ")";
