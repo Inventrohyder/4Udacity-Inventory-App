@@ -40,16 +40,18 @@ public class InsertSupplierTest extends TestCase {
         mContentResolver.insert(Suppliers.CONTENT_URI, mValues);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testInsertSupplierWithoutEmail() {
         mValues.remove(Suppliers.COLUMN_SUPPLIER_EMAIL);
-        mContentResolver.insert(Suppliers.CONTENT_URI, mValues);
+        Uri rowUri = mContentResolver.insert(Suppliers.CONTENT_URI, mValues);
+        asserSuccessfulInsertion(rowUri);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testInsertSupplierWithoutPhone() {
         mValues.remove(Suppliers.COLUMN_SUPPLIER_PHONE);
-        mContentResolver.insert(Suppliers.CONTENT_URI, mValues);
+        Uri rowUri = mContentResolver.insert(Suppliers.CONTENT_URI, mValues);
+        asserSuccessfulInsertion(rowUri);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -61,6 +63,10 @@ public class InsertSupplierTest extends TestCase {
     @Test
     public void testInsertSupplier() {
         Uri rowUri = mContentResolver.insert(Suppliers.CONTENT_URI, mValues);
+        asserSuccessfulInsertion(rowUri);
+    }
+
+    private void asserSuccessfulInsertion(Uri rowUri) {
         assertNotNull(
                 "There should be a successful insertion of a supplier",
                 rowUri

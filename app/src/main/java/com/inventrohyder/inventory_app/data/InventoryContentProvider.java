@@ -186,7 +186,7 @@ public class InventoryContentProvider extends ContentProvider {
         String email = values.getAsString(SupplierEntry.COLUMN_EMAIL);
         if (
                 (phoneNumber == null || phoneNumber.isEmpty())
-                        || (email == null || email.isEmpty())
+                        && (email == null || email.isEmpty())
         ) {
             throw new IllegalArgumentException("Supplier requires at least one medium of communication");
         }

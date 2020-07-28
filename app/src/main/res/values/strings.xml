@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Inventory App</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_products">Products</string>
+    <string name="title_suppliers">Suppliers</string>
+    <string name="order_from_supplier">Order from supplier</string>
+    <string name="order">Order</string>
+    <string name="default_email_subject">Order from Inventory App</string>
+    <string name="default_order_message">I would like to order your products</string>
+    <string name="choose_communication_question">How do you want to contact the supplier for ordering?</string>
+    <string name="email">Email</string>
+    <string name="sms">SMS</string>
+    <string name="send_sms">Send SMS</string>
+    <string name="send_email">Send Email</string>
+    <string name="choose_communication">Choose communication</string>
+    <string name="add_a_supplier_to_the_database">Add a supplier to the database</string>
+    <string name="add_supplier">Add Supplier</string>
 </resources>
