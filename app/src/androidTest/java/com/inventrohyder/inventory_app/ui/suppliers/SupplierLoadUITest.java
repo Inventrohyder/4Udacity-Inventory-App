@@ -16,8 +16,6 @@ import com.inventrohyder.inventory_app.MainActivity;
 import com.inventrohyder.inventory_app.R;
 import com.inventrohyder.inventory_app.data.InventoryProviderContract.Suppliers;
 
-import junit.framework.TestCase;
-
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -32,12 +30,13 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static com.inventrohyder.inventory_app.ui.suppliers.Utils.withSupplierId;
 
 @RunWith(AndroidJUnit4.class)
-public class SupplierLoadUITest extends TestCase {
+public class SupplierLoadUITest {
 
     private static int supplier_1_id;
     private static int supplier_2_id;
     private static ContentValues values_1;
     private static ContentValues values_2;
+
     @Rule
     public ActivityTestRule<MainActivity> mMainActivityActivityTestRule =
             new ActivityTestRule<>(MainActivity.class);
@@ -46,19 +45,18 @@ public class SupplierLoadUITest extends TestCase {
     public static void insertSuppliers() {
         ContentResolver contentResolver = ApplicationProvider.getApplicationContext().getContentResolver();
 
-        values_1 = new ContentValues();
 
+        values_1 = new ContentValues();
         values_1.put(Suppliers.COLUMN_NAME, InputTestUtils.Supplier_1.name);
         values_1.put(Suppliers.COLUMN_SUPPLIER_EMAIL, InputTestUtils.Supplier_1.email);
         values_1.put(Suppliers.COLUMN_SUPPLIER_PHONE, InputTestUtils.Supplier_1.phone);
 
         Uri insertedSupplier_1_Uri = contentResolver.insert(Suppliers.CONTENT_URI, values_1);
-
         assert insertedSupplier_1_Uri != null;
         supplier_1_id = (int) ContentUris.parseId(insertedSupplier_1_Uri);
 
-        values_2 = new ContentValues();
 
+        values_2 = new ContentValues();
         values_2.put(Suppliers.COLUMN_NAME, InputTestUtils.Supplier_2.name);
         values_2.put(Suppliers.COLUMN_SUPPLIER_EMAIL, InputTestUtils.Supplier_2.email);
         values_2.put(Suppliers.COLUMN_SUPPLIER_PHONE, InputTestUtils.Supplier_2.phone);
@@ -67,11 +65,10 @@ public class SupplierLoadUITest extends TestCase {
         assert insertedSupplier_2_Uri != null;
         supplier_2_id = (int) ContentUris.parseId(insertedSupplier_2_Uri);
 
-
     }
 
     @Test
-    public void testCheckSupplier() {
+    public void testCheckSupplierIsShown() {
         // Move to the suppliers tab
         onView(ViewMatchers.withId(R.id.navigation_suppliers)).perform(click());
 
