@@ -15,17 +15,19 @@ import com.inventrohyder.inventory_app.data.TestUtils;
 import junit.framework.TestCase;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
 public class InsertProductTest extends TestCase {
 
-    private ContentResolver mContentResolver;
+    private static ContentResolver mContentResolver;
     private ContentValues mValues;
+    private static long mSupplierId;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void initialSetup() {
         mContentResolver = ApplicationProvider.getApplicationContext().getContentResolver();
 
         ContentValues values = new ContentValues();
@@ -39,15 +41,18 @@ public class InsertProductTest extends TestCase {
                 "There should be a successful insertion of a supplier",
                 rowUri
         );
-        long supplierId = ContentUris.parseId(rowUri);
+        mSupplierId = ContentUris.parseId(rowUri);
+    }
 
+    @Before
+    public void setUp() {
         mValues = new ContentValues();
         mValues.put(Products.COLUMN_NAME, TestUtils.Product.name);
         mValues.put(Products.COLUMN_PRODUCT_QUANTITY, TestUtils.Product.quantity);
         mValues.put(Products.COLUMN_PRODUCT_PRICE, TestUtils.Product.price);
         mValues.put(Products.COLUMN_IS_AVAILABLE, TestUtils.Product.availability);
         mValues.put(Products.COLUMN_PRODUCT_PICTURE, TestUtils.Product.picture);
-        mValues.put(Products.COLUMN_SUPPLIER_ID, supplierId);
+        mValues.put(Products.COLUMN_SUPPLIER_ID, mSupplierId);
     }
 
     @Test(expected = IllegalArgumentException.class)

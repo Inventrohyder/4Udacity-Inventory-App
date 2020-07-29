@@ -15,18 +15,21 @@ import com.inventrohyder.inventory_app.data.TestUtils;
 import junit.framework.TestCase;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
 public class UpdateProductTest extends TestCase {
 
-    private ContentResolver mContentResolver;
+    private static ContentResolver mContentResolver;
+    private static ContentValues mInitialValues;
+    private static Uri mToUpdateUri;
+    private static long mSupplierId;
     private ContentValues mValues;
-    private Uri mToUpdateUri;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void initialSetup() {
         mContentResolver = ApplicationProvider.getApplicationContext().getContentResolver();
 
         ContentValues values = new ContentValues();
@@ -40,18 +43,22 @@ public class UpdateProductTest extends TestCase {
                 "There should be a successful insertion of a supplier",
                 rowUri
         );
-        long supplierId = ContentUris.parseId(rowUri);
+        mSupplierId = ContentUris.parseId(rowUri);
 
-        mValues = new ContentValues();
-        mValues.put(Products.COLUMN_NAME, TestUtils.Product.name);
-        mValues.put(Products.COLUMN_PRODUCT_QUANTITY, TestUtils.Product.quantity);
-        mValues.put(Products.COLUMN_PRODUCT_PRICE, TestUtils.Product.price);
-        mValues.put(Products.COLUMN_IS_AVAILABLE, TestUtils.Product.availability);
-        mValues.put(Products.COLUMN_PRODUCT_PICTURE, TestUtils.Product.picture);
-        mValues.put(Products.COLUMN_SUPPLIER_ID, supplierId);
+        mInitialValues = new ContentValues();
+        mInitialValues.put(Products.COLUMN_NAME, TestUtils.Product.name);
+        mInitialValues.put(Products.COLUMN_PRODUCT_QUANTITY, TestUtils.Product.quantity);
+        mInitialValues.put(Products.COLUMN_PRODUCT_PRICE, TestUtils.Product.price);
+        mInitialValues.put(Products.COLUMN_IS_AVAILABLE, TestUtils.Product.availability);
+        mInitialValues.put(Products.COLUMN_PRODUCT_PICTURE, TestUtils.Product.picture);
+        mInitialValues.put(Products.COLUMN_SUPPLIER_ID, mSupplierId);
 
-        mToUpdateUri = mContentResolver.insert(Products.CONTENT_URI, mValues);
+        mToUpdateUri = mContentResolver.insert(Products.CONTENT_URI, mInitialValues);
+    }
 
+    @Before
+    public void setUp() {
+        mValues = new ContentValues(mInitialValues);
     }
 
     @Test

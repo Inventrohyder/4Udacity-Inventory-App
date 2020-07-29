@@ -11,8 +11,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.inventrohyder.inventory_app.data.InventoryDatabaseContract.SupplierEntry;
 import com.inventrohyder.inventory_app.data.TestUtils.Supplier;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -22,16 +22,16 @@ import static org.junit.Assert.assertTrue;
 @RunWith(AndroidJUnit4.class)
 public class InventoryDbHelperTest {
 
-    private InventoryDbHelper mDbHelper;
+    private static InventoryDbHelper mDbHelper;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         Context context = ApplicationProvider.getApplicationContext();
         mDbHelper = new InventoryDbHelper(context);
     }
 
-    @After
-    public void finish() {
+    @AfterClass
+    public static void finish() {
         mDbHelper.close();
     }
 

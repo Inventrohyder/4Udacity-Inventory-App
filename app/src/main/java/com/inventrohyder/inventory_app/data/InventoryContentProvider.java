@@ -162,7 +162,7 @@ public class InventoryContentProvider extends ContentProvider {
     private Uri insertSupplier(ContentValues values, Uri uri) {
 
         ensureValidSupplierName(values);
-        ensureValidSupplierCommunication(values);
+        ensureValidSupplierInsertCommunication(values);
 
         long rowId;
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
@@ -180,7 +180,7 @@ public class InventoryContentProvider extends ContentProvider {
         return ContentUris.withAppendedId(Suppliers.CONTENT_URI, rowId);
     }
 
-    private void ensureValidSupplierCommunication(ContentValues values) {
+    private void ensureValidSupplierInsertCommunication(ContentValues values) {
         // Check that a mode of communication is added
         String phoneNumber = values.getAsString(SupplierEntry.COLUMN_TEL_NUMBER);
         String email = values.getAsString(SupplierEntry.COLUMN_EMAIL);
@@ -410,7 +410,7 @@ public class InventoryContentProvider extends ContentProvider {
         // Check that the communication is valid
         if (values.containsKey(Suppliers.COLUMN_SUPPLIER_EMAIL)
                 || values.containsKey(Suppliers.COLUMN_SUPPLIER_PHONE)) {
-            ensureValidSupplierCommunication(values);
+            ensureValidSupplierUpdateCommunication(values);
         }
 
         int updatedRows = db.update(SupplierEntry.TABLE_NAME, values, selection, selectionArgs);
@@ -421,5 +421,17 @@ public class InventoryContentProvider extends ContentProvider {
         }
 
         return updatedRows;
+    }
+
+    private void ensureValidSupplierUpdateCommunication(ContentValues values) {
+        // Check that a mode of communication is added
+        String phoneNumber = values.getAsString(SupplierEntry.COLUMN_TEL_NUMBER);
+        String email = values.getAsString(SupplierEntry.COLUMN_EMAIL);
+        if (
+                (phoneNumber == null || phoneNumber.isEmpty())
+                        || (email == null || email.isEmpty())
+        ) {
+            throw new IllegalArgumentException("Supplier requires at least one medium of communication");
+        }
     }
 }

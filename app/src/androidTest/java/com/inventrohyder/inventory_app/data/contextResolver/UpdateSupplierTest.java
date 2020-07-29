@@ -13,26 +13,35 @@ import com.inventrohyder.inventory_app.data.TestUtils;
 import junit.framework.TestCase;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
 public class UpdateSupplierTest extends TestCase {
 
-    private ContentResolver mContentResolver;
+    private static ContentResolver mContentResolver;
+    private static ContentValues mInitialValues;
     private ContentValues mValues;
-    private Uri mToUpdateUri;
+    private static Uri mToUpdateUri;
+
+    @BeforeClass
+    public static void initialSetup() {
+        mContentResolver = ApplicationProvider.getApplicationContext().getContentResolver();
+
+        mInitialValues = new ContentValues();
+
+        mInitialValues.put(Suppliers.COLUMN_NAME, TestUtils.Supplier.name);
+        mInitialValues.put(Suppliers.COLUMN_SUPPLIER_EMAIL, TestUtils.Supplier.email);
+        mInitialValues.put(Suppliers.COLUMN_SUPPLIER_PHONE, TestUtils.Supplier.phone);
+
+        mToUpdateUri = mContentResolver.insert(Suppliers.CONTENT_URI, mInitialValues);
+    }
+
 
     @Before
     public void setUp() {
-        mContentResolver = ApplicationProvider.getApplicationContext().getContentResolver();
-        mValues = new ContentValues();
-
-        mValues.put(Suppliers.COLUMN_NAME, TestUtils.Supplier.name);
-        mValues.put(Suppliers.COLUMN_SUPPLIER_EMAIL, TestUtils.Supplier.email);
-        mValues.put(Suppliers.COLUMN_SUPPLIER_PHONE, TestUtils.Supplier.phone);
-
-        mToUpdateUri = mContentResolver.insert(Suppliers.CONTENT_URI, mValues);
+        mValues = new ContentValues(mInitialValues);
     }
 
     @Test

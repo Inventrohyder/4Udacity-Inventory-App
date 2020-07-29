@@ -14,18 +14,23 @@ import com.inventrohyder.inventory_app.data.TestUtils;
 import junit.framework.TestCase;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
 public class InsertSupplierTest extends TestCase {
 
-    private ContentResolver mContentResolver;
+    private static ContentResolver mContentResolver;
     private ContentValues mValues;
+
+    @BeforeClass
+    public static void initialSetup() {
+        mContentResolver = ApplicationProvider.getApplicationContext().getContentResolver();
+    }
 
     @Before
     public void setUp() {
-        mContentResolver = ApplicationProvider.getApplicationContext().getContentResolver();
         mValues = new ContentValues();
 
         mValues.put(Suppliers.COLUMN_NAME, TestUtils.Supplier.name);
