@@ -8,8 +8,8 @@ import android.net.Uri;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.inventrohyder.inventory_app.InputTestUtils;
 import com.inventrohyder.inventory_app.data.InventoryProviderContract.Suppliers;
-import com.inventrohyder.inventory_app.data.TestUtils;
 
 import junit.framework.TestCase;
 
@@ -33,9 +33,9 @@ public class InsertSupplierTest extends TestCase {
     public void setUp() {
         mValues = new ContentValues();
 
-        mValues.put(Suppliers.COLUMN_NAME, TestUtils.Supplier.name);
-        mValues.put(Suppliers.COLUMN_SUPPLIER_EMAIL, TestUtils.Supplier.email);
-        mValues.put(Suppliers.COLUMN_SUPPLIER_PHONE, TestUtils.Supplier.phone);
+        mValues.put(Suppliers.COLUMN_NAME, InputTestUtils.Supplier_1.name);
+        mValues.put(Suppliers.COLUMN_SUPPLIER_EMAIL, InputTestUtils.Supplier_1.email);
+        mValues.put(Suppliers.COLUMN_SUPPLIER_PHONE, InputTestUtils.Supplier_1.phone);
     }
 
     @Test(expected = IllegalArgumentException.class)

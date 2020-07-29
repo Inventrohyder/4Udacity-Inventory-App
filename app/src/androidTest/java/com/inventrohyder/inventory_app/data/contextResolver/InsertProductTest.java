@@ -8,9 +8,9 @@ import android.net.Uri;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.inventrohyder.inventory_app.InputTestUtils;
 import com.inventrohyder.inventory_app.data.InventoryProviderContract.Products;
 import com.inventrohyder.inventory_app.data.InventoryProviderContract.Suppliers;
-import com.inventrohyder.inventory_app.data.TestUtils;
 
 import junit.framework.TestCase;
 
@@ -32,9 +32,9 @@ public class InsertProductTest extends TestCase {
 
         ContentValues values = new ContentValues();
 
-        values.put(Suppliers.COLUMN_NAME, TestUtils.Supplier.name);
-        values.put(Suppliers.COLUMN_SUPPLIER_EMAIL, TestUtils.Supplier.email);
-        values.put(Suppliers.COLUMN_SUPPLIER_PHONE, TestUtils.Supplier.phone);
+        values.put(Suppliers.COLUMN_NAME, InputTestUtils.Supplier_1.name);
+        values.put(Suppliers.COLUMN_SUPPLIER_EMAIL, InputTestUtils.Supplier_1.email);
+        values.put(Suppliers.COLUMN_SUPPLIER_PHONE, InputTestUtils.Supplier_1.phone);
 
         Uri rowUri = mContentResolver.insert(Suppliers.CONTENT_URI, values);
         assertNotNull(
@@ -47,11 +47,11 @@ public class InsertProductTest extends TestCase {
     @Before
     public void setUp() {
         mValues = new ContentValues();
-        mValues.put(Products.COLUMN_NAME, TestUtils.Product.name);
-        mValues.put(Products.COLUMN_PRODUCT_QUANTITY, TestUtils.Product.quantity);
-        mValues.put(Products.COLUMN_PRODUCT_PRICE, TestUtils.Product.price);
-        mValues.put(Products.COLUMN_IS_AVAILABLE, TestUtils.Product.availability);
-        mValues.put(Products.COLUMN_PRODUCT_PICTURE, TestUtils.Product.picture);
+        mValues.put(Products.COLUMN_NAME, InputTestUtils.Product_1.name);
+        mValues.put(Products.COLUMN_PRODUCT_QUANTITY, InputTestUtils.Product_1.quantity);
+        mValues.put(Products.COLUMN_PRODUCT_PRICE, InputTestUtils.Product_1.price);
+        mValues.put(Products.COLUMN_IS_AVAILABLE, InputTestUtils.Product_1.availability);
+        mValues.put(Products.COLUMN_PRODUCT_PICTURE, InputTestUtils.Product_1.picture);
         mValues.put(Products.COLUMN_SUPPLIER_ID, mSupplierId);
     }
 

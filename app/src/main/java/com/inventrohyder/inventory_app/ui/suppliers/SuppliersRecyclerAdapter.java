@@ -27,6 +27,7 @@ class SuppliersRecyclerAdapter extends RecyclerView.Adapter<SuppliersRecyclerAda
     private int mNamePos;
     private int mEmailPos;
     private int mPhonePos;
+    private int mIdPos;
 
     public SuppliersRecyclerAdapter(Context context, Cursor c) {
         mCursor = c;
@@ -38,6 +39,7 @@ class SuppliersRecyclerAdapter extends RecyclerView.Adapter<SuppliersRecyclerAda
     private void populateColumnPositions() {
         if (mCursor == null)
             return;
+        mIdPos = mCursor.getColumnIndex(Suppliers._ID);
         mNamePos = mCursor.getColumnIndex(Suppliers.COLUMN_NAME);
         mEmailPos = mCursor.getColumnIndex(Suppliers.COLUMN_SUPPLIER_EMAIL);
         mPhonePos = mCursor.getColumnIndex(Suppliers.COLUMN_SUPPLIER_PHONE);
@@ -63,11 +65,13 @@ class SuppliersRecyclerAdapter extends RecyclerView.Adapter<SuppliersRecyclerAda
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         mCursor.moveToPosition(position);
 
+        String id = mCursor.getString(mIdPos);
         String supplierName = mCursor.getString(mNamePos);
         String supplierEmail = mCursor.getString(mEmailPos);
         String supplierPhone = mCursor.getString(mPhonePos);
 
         holder.mTextSupplierName.setText(supplierName);
+        holder.mId = Integer.parseInt(id);
         holder.mEmail = supplierEmail;
         holder.mPhone = supplierPhone;
 
@@ -98,6 +102,7 @@ class SuppliersRecyclerAdapter extends RecyclerView.Adapter<SuppliersRecyclerAda
             }
         };
         String mPhone;
+        int mId;
         final View.OnClickListener phoneClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {

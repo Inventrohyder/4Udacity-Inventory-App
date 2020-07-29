@@ -7,8 +7,8 @@ import android.net.Uri;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.inventrohyder.inventory_app.InputTestUtils;
 import com.inventrohyder.inventory_app.data.InventoryProviderContract.Suppliers;
-import com.inventrohyder.inventory_app.data.TestUtils;
 
 import junit.framework.TestCase;
 
@@ -31,9 +31,9 @@ public class UpdateSupplierTest extends TestCase {
 
         mInitialValues = new ContentValues();
 
-        mInitialValues.put(Suppliers.COLUMN_NAME, TestUtils.Supplier.name);
-        mInitialValues.put(Suppliers.COLUMN_SUPPLIER_EMAIL, TestUtils.Supplier.email);
-        mInitialValues.put(Suppliers.COLUMN_SUPPLIER_PHONE, TestUtils.Supplier.phone);
+        mInitialValues.put(Suppliers.COLUMN_NAME, InputTestUtils.Supplier_1.name);
+        mInitialValues.put(Suppliers.COLUMN_SUPPLIER_EMAIL, InputTestUtils.Supplier_1.email);
+        mInitialValues.put(Suppliers.COLUMN_SUPPLIER_PHONE, InputTestUtils.Supplier_1.phone);
 
         mToUpdateUri = mContentResolver.insert(Suppliers.CONTENT_URI, mInitialValues);
     }

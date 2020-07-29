@@ -8,8 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.inventrohyder.inventory_app.InputTestUtils.Supplier_1;
 import com.inventrohyder.inventory_app.data.InventoryDatabaseContract.SupplierEntry;
-import com.inventrohyder.inventory_app.data.TestUtils.Supplier;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -54,9 +54,9 @@ public class InventoryDbHelperTest {
     @Test
     public void insertSupplier() {
         ContentValues values = new ContentValues();
-        values.put(SupplierEntry.COLUMN_NAME, Supplier.name);
-        values.put(SupplierEntry.COLUMN_EMAIL, Supplier.email);
-        values.put(SupplierEntry.COLUMN_TEL_NUMBER, Supplier.phone);
+        values.put(SupplierEntry.COLUMN_NAME, Supplier_1.name);
+        values.put(SupplierEntry.COLUMN_EMAIL, Supplier_1.email);
+        values.put(SupplierEntry.COLUMN_TEL_NUMBER, Supplier_1.phone);
 
         long supplierId = mDbHelper.getWritableDatabase()
                 .insert(SupplierEntry.TABLE_NAME, null, values);
@@ -80,10 +80,10 @@ public class InventoryDbHelperTest {
         int telColIndex = cursor.getColumnIndex(SupplierEntry.COLUMN_TEL_NUMBER);
 
         assertEquals("The queried name must match the inserted name",
-                Supplier.name, cursor.getString(nameColIndex));
+                Supplier_1.name, cursor.getString(nameColIndex));
         assertEquals("The queried email must match the inserted email",
-                Supplier.email, cursor.getString(emailColIndex));
+                Supplier_1.email, cursor.getString(emailColIndex));
         assertEquals("The queried phone number must match the inserted phone number",
-                Supplier.phone, cursor.getString(telColIndex));
+                Supplier_1.phone, cursor.getString(telColIndex));
     }
 }

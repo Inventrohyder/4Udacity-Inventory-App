@@ -18,16 +18,17 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
+    <!--TODO: Switch this to be a menu since it blocks other views -->
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/extended_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:contentDescription="@string/add_a_supplier_to_the_database"
         android:text="@string/add_supplier"
         app:icon="@drawable/ic_add"
         app:layout_constraintBottom_toBottomOf="@+id/suppliers_list"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
